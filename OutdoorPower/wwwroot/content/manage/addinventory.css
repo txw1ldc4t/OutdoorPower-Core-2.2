@@ -1,0 +1,70 @@
+﻿section {
+    min-height: 45vh;
+    background-color: lightgray;
+    padding-bottom: 3vh;
+    margin-top: 2vh;
+}
+
+div.h-divider {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 1px;
+    width: 100%;
+    border-top: 1px solid #ED2024;
+}
+
+div.row.zero-top-margin {
+    margin-top: 0;
+}
+
+div.thumbnail-modern-image {
+    min-height: 15.3em;
+    max-height: 15.3em;
+    position: relative;
+    overflow: hidden;
+}
+
+div.thumbnail-modern-image img {
+    max-width: 15vw;
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+
+.thumbnail-modern-image .close, .thumbnail-modern-image .close i {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+    color: white;
+    text-shadow: none;
+    font-weight: normal;
+    font-style: normal;
+    opacity: 1;
+    text-rendering: initial;
+}
+
+.thumbnail-modern-image .close i:hover {
+    color: #ED2024;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}

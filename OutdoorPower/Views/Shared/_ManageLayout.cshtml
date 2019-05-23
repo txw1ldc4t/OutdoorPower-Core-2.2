@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+
+<html class="wide wow-animation" lang="en">
+<head>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1,user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <!---->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic" />
+    <link href="~/lib/Swiper/css/swiper.min.css" rel="stylesheet" />
+    <link href="~/lib/flat-icons-set-2/css/fl-flat-icons-set-2.css" rel="stylesheet" />
+    <link href="~/lib/bigmug-line_coders/css/fl-36-slim-icons.css" rel="stylesheet" />
+    <link href="~/lib/bigmug-line_coders/css/fl-bigmug-line.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/content/site.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    @RenderSection("Styles", required: false)
+    </head>
+<body>
+    <div class="page-loader">
+        <div class="brand-name"><img src="~/images/OutdoorPowerLogoRed.jpeg.png" alt="" width="140" height="59" /></div>
+        <div class="page-loader-body">
+            <div class="cssload-jumping"></div>
+        </div>
+    </div>
+    <div class="page">
+        <header class="section page-header">
+            <div class="rd-navbar-wrap novi-background">
+                <nav class="rd-navbar rd-navbar-top-panel-light" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-fullwidth" data-xl-device-layout="rd-navbar-fullwidth" data-xxl-layout="rd-navbar-fullwidth" data-xxl-device-layout="rd-navbar-fullwidth" data-lg-stick-up-offset="90px" data-xl-stick-up-offset="90px" data-xxl-stick-up-offset="90px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true" data-stick-up-clone="true">
+                    <div class="rd-navbar-inner">
+                        <div class="rd-navbar-nav-wrap">
+                            <ul class="rd-navbar-nav">
+                                <li><a asp-controller="Manage" asp-action="Index">Manage</a></li>
+                                <li><a asp-controller="Manage" asp-action="Inventory">Add Inventory</a></li>
+                                <li><a asp-controller="Manage" asp-action="Users">Modify Users</a></li>
+                            </ul>
+                        </div>
+                        <div class="rd-navbar-panel">
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            <div class="rd-navbar-brand"><a class="brand-name" asp-controller="home" asp-action="index"><img src="/images/OutdoorPowerLogo-01.jpeg.png" alt="" width="140" height="59" /></a></div>
+                        </div>
+                        <div class="rd-navbar-top-panel">
+                            <div class="rd-navbar-top-panel-toggle" data-rd-navbar-toggle=".rd-navbar-top-panel"><span></span></div>
+                            <div class="rd-navbar-top-panel-content">
+                                <partial name="_LoginPartial" />
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        @RenderBody()
+        <footer class="section novi-background bg-cover bg-gray-dark">
+            <div class="page-footer-minimal">
+                <div class="container">
+                    <div class="bg-dark-transparent-85">
+                        <div class="margin-top-1 margin-top-md-0 pull-right">
+                            <span class="margin-right-2 text-size-5">Powered by</span>
+                            <a target="_blank" rel="nofollow" data-cmp="link" href="https://www.hustlerturf.com/" data-birf-cmp="mmt_logo_desktop" data-birf-log="component">
+                                <img src="~/images/Hustler_Logo_dark.png" alt="" height="33">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <hr class="gray" />
+            </div>
+            <div class="pre-footer-minimal">
+                <div class="pre-footer-minimal-inner">
+                    <div class="container text-center text-md-left">
+                        <div class="row justify-content-md-center row-55">
+                            <div class="col-md-4 col-lg-3 text-md-center text-lg-left">
+                                <h4>Quick Links</h4>
+                                <div class="group-md-1">
+                                    <ul class="list-nav-marked">
+                                        <li class="active"><a href="index.html">Home</a></li>
+                                        <li><a href="#">Products</a></li>
+                                        <li><a href="#">About us</a></li>
+                                        <li><a href="#">Testimonials</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <h4>Hours of Operation</h4>
+                                <dl class="terms-list-inline">
+                                    <dt>Weekdays</dt>
+                                    <dd>08:00am–7:30pm</dd>
+                                </dl>
+                                <dl class="terms-list-inline">
+                                    <dt>Saturday</dt>
+                                    <dd>08:00am–4:00pm</dd>
+                                </dl>
+                                <dl class="terms-list-inline">
+                                    <dt>Sunday</dt>
+                                    <dd>Closed</dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-5 col-lg-4">
+                                <h4>Contact</h4>
+                                <ul class="list-xxs">
+                                    <li><a class="link link-md" href="tel:(618) 435–5296">(618) 435–5296</a></li>
+                                    <li><a class="link" href="mailto:support@outdoorpowertrader.com">support@outdoorpowertrader.com</a></li>
+                                    <li>
+                                        <address class="d-inline-block" style="max-width: 215px;">
+                                            <p>605 N. Main, Benton, IL 62812</p>
+                                        </address>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <hr class="gray" />
+                </div>
+            </div>
+            <div class="page-footer-minimal">
+                <div class="container">
+                    <p class="rights">Outdoor Power Trader&nbsp;&copy;&nbsp;<span class="copyright-year"></span>.&nbsp;<br class="d-md-none" /><a class="link-underline" href="#">Privacy Policy</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery-migrate/jquery-migrate.min.js"></script>
+    <script src="~/lib/jquery-cookie/jquery.cookie.min.js"></script>
+    <script src="~/lib/device.js/device.min.js"></script>
+    <script src="~/lib/jquery-resize/jquery.ba-resize.min.js"></script>
+    <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/lib/jquery.touchswipe/jquery.touchSwipe.min.js"></script>
+    <script src="~/lib/popper.js/popper.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Regula should go here-->
+    <script src="~/lib/jquery.form/jquery.form.min.js"></script>
+    <!-- RD Input label should go here-->
+    <script src="~/lib/OwlCarousel2/owl.carousel.js"></script>
+    <script src="~/lib/jquery.isotope/isotope.pkgd.min.js"></script>
+    <script src="~/lib/jquery.rd-navbar/js/jquery.rd-navbar.min.js"></script>
+    <!-- UI To Top should go here -->
+    <!-- Swiper should go here-->
+    <script src="~/lib/lightgallery/js/lightgallery-all.min.js"></script>
+    <script src="~/lib/wow/wow.min.js"></script>
+    <script src="~/lib/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+    <script src="~/lib/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+    <!-- custom scrollbar should go here-->
+    <script src="~/lib/materialize/js/materialize.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+    
+    <script src="~/js/core.min.js"></script>
+    <script src="~/js/script.js"></script>
+
+</body>
+</html>
+

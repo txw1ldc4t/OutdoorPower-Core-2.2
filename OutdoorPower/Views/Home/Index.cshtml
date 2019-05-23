@@ -1,0 +1,102 @@
+﻿@model OutdoorPower.ViewModels.HomeIndexViewModel
+<section class="section" >
+    <div class="swiper-bg-wrap swiper-style-1 swiper-jumbotron-outside">
+        <div class="swiper-container swiper-slider swiper-bg" data-autoplay="65000" data-slide-effect="fade">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" data-slide-bg="/images/slide-1.jpg">
+                    <div class="swiper-slide-caption" data-speed="0.5" data-fade="true"></div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="jumbotron-custom jumbotron-custom-variant-1 jumbotron-custom-outside">
+            <form asp-action="Search" method="post" style="width:100%;">
+                <div class="container">
+                    <div class="row">
+                        <div class="offset-md-3 col-md-8">
+                            <div class="container form-register-wrap">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>Find Your Yard Solution</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="QType" class="col-form-label" control-label>Type</label>
+                                            <div class="">
+                                                <select id="QInventoryType" asp-for="QType" asp-items="Model.TypeList" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="QZipCodeRadius" class="col-form-label" control-label>Radius</label>
+                                            <div class="">
+                                                <select id="QZipCodeRadius" asp-for="QZipCodeRadius" class="form-control">
+                                                    <option value="5" selected="selected">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="ZipCode" class="col-form-label" control-label>Zip</label>
+                                            <div class="">
+                                                <input id="ZipCode" asp-for="ZipCode" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="QMake" class="col-form-label" control-label>Brand</label>
+                                            <div class="">
+                                                <select id="QInventoryMake" asp-for="QMake" asp-items="Model.MakeList" class="form-control">
+                                                    <option value="-1" selected="selected">All</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="QModel" class="col-form-label" control-label>Model</label>
+                                            <div class="">
+                                                <select id="QInventoryModel" asp-for="QModel" class="form-control" disabled="disabled"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="QDeck" class="col-form-label" control-label>Deck</label>
+                                            <div class="">
+                                                <select id="QDeck" asp-for="QDeck" class="form-control" disabled="disabled"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary pull-right" value="Search" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+@section Scripts  {
+    <script src="~/js/namespace.js"></script>
+    <script src="~/js/home/index.js"></script>
+}

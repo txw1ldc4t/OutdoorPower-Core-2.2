@@ -1,0 +1,70 @@
+﻿section {
+    background-color: lightgray;
+    padding-top: 4em;
+    height: 100%;
+    padding-bottom: 4em;
+}
+
+#metrics_table{
+    width: 100%;
+}
+
+.table-wrap, .table-responsive{
+    width: 100%;
+}
+
+.table-responsive{
+    padding: 1em;
+}
+
+.mb-5{
+    display: inline-block;
+    font-size: x-small;
+}
+
+#exampleModalLong{
+    min-height: 50em;
+}
+
+.modal-dialog, .modal-content{
+    width: 800px;
+}
+
+.panel-body input, .panel-body label{
+    display: inline-block;
+}
+
+.panel-body label{
+    min-width: 100px;
+    margin-left: 1em;
+}
+
+.row{
+    margin-top: 1em;
+}
+
+.modal-header {
+    background-color: rgb(54, 61, 65);
+    color: rgb(255, 255, 255);
+}
+
+.btn{
+    margin-top: 0;
+}
+
+.modal i{
+    color: white;
+    font-style: none;
+    text-shadow: none;
+}
+
+#ModelMessage{
+    display: block;
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+
+tr.alert-primary, tr.alert-primary td, tr.alert-primary td.sorting_1 {
+    background-color: #cce5ff;
+}

@@ -1,0 +1,131 @@
+﻿a.inventory{
+    width:100%;
+}
+
+.control-label{
+    height: 1.2em;
+    font-size: .75em;
+}
+
+div.form-group{
+    margin: 0;
+}
+
+div.main {
+    min-height: 700px;
+}
+
+div.accordion-panel-content-wrapper {
+    background-color: white;
+    color: #837E7C;
+    padding: 10px;
+}
+
+div.thumbnail-modern-image {
+    min-height: 15.3em;
+    max-height: 15.3em;
+    position: relative;
+    overflow: hidden;
+}
+
+    div.thumbnail-modern-image img {
+        max-width: 15vw;
+        position: absolute;
+        top: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        right: -9999px;
+        margin: auto;
+    }
+
+img.center{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+table.options-primary, table.options-seconday{
+    display:inline-block;
+}
+
+div.filters {
+    background-color: white;
+    border-color: white;
+    padding: 0;
+}
+
+div.inventory {
+    display: block;
+    border-width: 2px;
+    border-radius: 10px;
+    background-color: white;
+    margin-right: .5vw;
+    margin-bottom: 1vh;
+    padding: .5em .5em .25em .5em;
+}
+
+input {
+    max-width: 5vw;
+    border: 2px solid #ED2024;
+    background: rgba(255,255,255,0.5);
+    margin: 0 0 10px 0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+div.accordion-heading {
+    color: white;
+    background: #ED2024;
+    border-color: #ED2024;
+}
+
+div.accordion-heading span{
+    color: white;
+}
+
+label{
+    min-width: 3vw;
+}
+
+
+.form-control {
+    display: inline-block;
+    width: auto;
+    height: 2em;
+    padding: .05em;
+    font-size: .74em;
+}
+.productbox {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.caption {
+    padding: 10px;
+    background-color: rgba(0,0,0,0.7);
+    overflow: hidden;
+    font-size: 11px;
+    color: #FFF;
+    min-height: 5em;
+}
+
+ul.pagination{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+ul.pagination li:first-child {
+    display: inline-block;
+}
+
+ul.pagination li:first-child {
+    margin-left: auto;
+}
+
+ul.pagination li:last-child {
+    margin-right: auto;
+}

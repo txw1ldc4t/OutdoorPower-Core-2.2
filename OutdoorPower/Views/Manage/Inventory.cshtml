@@ -1,0 +1,277 @@
+﻿@model ManageAddInventoryViewModel
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_ManageLayout.cshtml";
+}
+@section Styles  {
+    <link href="~/content/manage/addinventory.css" rel="stylesheet" />
+}
+
+
+<section style="">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div asp-validation-summary="All"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" enctype="multipart/form-data" class="form-horizontal form-register-wrap" role="form">
+                    <h4>Inventory Info</h4>
+                    <div class="h-divider"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Title" class="col-form-label" control-label></label>
+                                <div class="">
+                                    <input id="Title" asp-for="Title" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Price" class="col-form-label" control-label></label>
+                                <div class="">
+                                    <input id="Price" asp-for="Price" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="OPTPublic" class="col-form-label" control-label></label>
+                                <div class="">
+                                    <select type="text" id="OPTPublic" asp-for="OPTPublic" class="form-control" rows="5" cols="20">
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row zero-top-margin">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="SerialNumber" class="col-form-label" control-label></label>
+                                <div class="">
+                                    <input id="SerialNumber" asp-for="SerialNumber" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Year" class="col-form-label" control-label></label>
+                                <div class="">
+                                    <select id="Year" asp-for="Year" class="form-control" asp-items="Model.YearList">
+                                        <option value="-1">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Fuel" class="col-form-label" control-label></label>
+                                <div class="">
+                                    <select type="text" id="OPTPublic" asp-for="Fuel" class="form-control" rows="5" cols="20">
+                                        <option value="1">Gas</option>
+                                        <option value="2">Diesel</option>
+                                        <option value="3">Propane</option>
+                                        <option value="4">Gas/Propane</option>
+                                        <option value="5">Electric</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row zero-top-margin">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="QInventoryTypeId" class="col-form-label" control-label>Type</label>
+                                <div class="">
+                                    <select id="QInventoryTypeId" asp-for="QInventoryTypeId" asp-items="Model.TypeList" class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="QInventoryMakeId" class="col-form-label" control-label>Brand</label>
+                                <div class="">
+                                    <select id="QInventoryMakeId" asp-for="QInventoryMakeId" asp-items="Model.MakeList" class="form-control">
+                                        <option value="-1">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" id="div-model">
+                                <label asp-for="QInventoryModelId" class="col-form-label" control-label>Model</label>
+                                <div class="">
+                                    @if (Model.ModelList.Count > 0)
+                                    {
+                                        <select id="QInventoryModelId" asp-for="QInventoryModelId" asp-items="Model.ModelList" class="form-control">
+                                            <option value="-1">Select</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select id="QInventoryModelId" asp-for="QInventoryModelId" class="form-control" disabled="disabled"></select>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" id="div-modeloption">
+                                <label asp-for="QInventoryModelOptionId" class="col-form-label" control-label>Deck</label>
+                                <div class="">
+                                    @if (Model.ModelOptionList.Count > 0)
+                                    {
+                                        <select id="QInventoryModelOptionId" asp-for="QInventoryModelOptionId" asp-items="Model.ModelOptionList" class="form-control">
+                                            <option value="-1">Select</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select id="QInventoryModelOptionId" asp-for="QInventoryModelOptionId" class="form-control" disabled="disabled"></select>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row zero-top-margin collapse" id="row-other">
+                        <div class="offset-md-3 col-md-3">
+                            <div class="form-group" id="div-make-other">
+                                <label asp-for="QInventoryMakeOther" class="col-form-label" control-label>Other Brand</label>
+                                <div class="">
+                                    <input type="text" maxlength="150" id="QInventoryMakeOther" asp-for="QInventoryMakeOther" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" id="div-model-other">
+                                <label asp-for="QInventoryModelOther" class="col-form-label" control-label>Other Model</label>
+                                <div class="">
+                                    <input type="text" maxlength="150" id="QInventoryModelOther" asp-for="QInventoryModelOther" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" id="div-modeloption-other">
+                                <label asp-for="QInventoryModelOptionOther" class="col-form-label" control-label>Other Deck</label>
+                                <div class="">
+                                    <input type="text" maxlength="150" id="QInventoryModelOptionOther" asp-for="QInventoryModelOptionOther" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row zero-top-margin">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Description" class="col-form-label" control-label></label>
+                                <div class="">
+                                    <textarea type="text" id="Description" asp-for="Description" class="form-control" rows="5" cols="20"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row zero-top-margin">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Warranty" class="col-form-label" control-label>Warranty Information</label>
+                                <div class="">
+                                    <input type="text" id="Warranty" asp-for="Warranty" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Engine Info</h4>
+                    <div class="h-divider"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="EngineBrand" class="col-form-label" control-label>Engine Brand</label>
+                                <div class="">
+                                    <select id="EngineBrand" asp-for="EngineBrand" asp-items="Model.EngineBrandList" class="form-control">
+                                        <option>Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="EngineHorsePower" class="col-form-label" control-label>Horse Power</label>
+                                <div class="">
+                                    @if (Model.EngineHorsePowerList.Count > 0)
+                                    {
+                                        <select id="EngineHorsePower" asp-for="EngineHorsePower" asp-items="Model.EngineHorsePowerList" class="form-control">
+                                            <option>Select</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select id="EngineHorsePower" asp-for="EngineHorsePower" class="form-control" disabled="disabled"></select>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="EngineHours" class="col-form-label" control-label>Hours</label>
+                                <div class="">
+                                    <input type="text" id="EngineHours" asp-for="EngineHours" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Images</h4>
+                    <div class="h-divider"></div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="fileUpload btn btn-primary">
+                                <span>Upload New Images</span>
+                                <input asp-for="Images" id="Images" class="upload" type="file" name="Images" accept="image/*" multiple />
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.ImageList.Count > 0)
+                    {
+                    <div class="row">
+                        @foreach (DealerInventoryImage image in Model.ImageList)
+                        {
+                        <div class="col-md-3" style="margin-bottom:10px;" id="ImageDiv_@image.Id">
+                            <div class="thumbnail thumbnail-modern-image">
+                                <span class="close"><i class="fa fa-trash" onclick="javascript:page.deleteImage(@image.Id)"></i></span>
+                                <img src='@image.WebPath' class="thumbnail-modern-image" />
+                            </div>
+                        </div>
+                        }
+                        </div>
+                    }
+                <div class="row">
+                    @if (Model.Id > 0)
+                    {
+                        <div class="col-md-10">
+                            <a asp-controller="Manage" class="btn btn-primary pull-right" asp-action="Inventory">Add New</a>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-primary pull-right" value="Update" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-primary pull-right" value="Save" />
+                        </div>
+                    }
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/js/namespace.js"></script>
+    <script src="~/js/manage/addinventory.js"></script>
+}

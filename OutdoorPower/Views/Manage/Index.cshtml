@@ -1,0 +1,543 @@
+﻿@using Newtonsoft.Json
+@using OutdoorPower.Models.Metrics
+
+@model ManageIndexViewModel
+
+@{
+    Layout = "~/Views/Shared/_ManageLayout.cshtml";
+}
+
+@section Styles{
+
+    <link href="~/js/temp/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Datepicker -->
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+    <!-- Morris Charts CSS -->
+    <link href="~/js/temp/morris.js/morris.css" rel="stylesheet" />
+
+    <!-- vector map CSS -->
+    <link href="~/js/temp/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+
+    <!-- Data table CSS -->
+    <link href="~/js/temp/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <!-- Chartist CSS -->
+    <link href="~/js/temp/chartist/dist/chartist.min.css" rel="stylesheet" />
+
+    <link href="~/js/temp/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" />
+
+    <link href="~/content/manage/index.css" rel="stylesheet" />
+    <!-- Custom CSS
+    <link href="~/js/temp/style.css" rel="stylesheet" />-->
+}
+
+<!--/Preloader-->
+<section>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view panel-refresh">
+                    <div class="refresh-container">
+                        <div class="la-anim-1"></div>
+                    </div>
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Month-To-Date (@DateTime.Now.ToString("MMMM"))</h6>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block refresh">
+                                <i class="zmdi zmdi-replay"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div id="chart_mtd" class="ct-chart ct-perfect-fourth ct-chart-before-pad-zero" style="height:294px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view panel-refresh">
+                    <div class="refresh-container">
+                        <div class="la-anim-1"></div>
+                    </div>
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Year-To-Date</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div id="chart_ytd" class="morris-chart" style="height:243px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+        <!-- Row -->
+        <div class="row no-margin">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12" style="padding:0;">
+                <div class="panel panel-success card-view">
+                    <div class="panel-heading small-panel-heading relative">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-light">Monthly Revenue</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="head-overlay"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body pa-0" style="padding: 0;">
+                            <div class="sm-data-box bg-green" style="width:@Model.CalculateMonthlyRevenueDivWidth()%;">
+                                <div class="container-fluid">
+                                    <div class="row no-margin">
+                                        <div class="col-xs-12 text-center  pl-0 pr-0 data-wrap-right">
+                                            <div id="sparkline_4" style="width: 100%; overflow: hidden; margin: 0px auto;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-success card-view">
+                    <div class="panel-heading small-panel-heading relative">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-light">Yearly Revenue</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="head-overlay"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body pa-0" style="padding: 0;">
+                            <div class="sm-data-box bg-green" style="width:@Model.CalculateYearlyRevenueDivWidth()%;">
+                                <div class="container-fluid">
+                                    <div class="row no-margin">
+                                        <div class="col-xs-12 text-center  pl-0 pr-0 data-wrap-right">
+                                            <div id="div_yearly_revenue" style="width: 100%; overflow: hidden; margin: 0px auto;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Units Sold (Year-To-Date)</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body row pa-0">
+                            <div class="table-wrap">
+                                <div class="table-responsive no-margin">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:50px;">Brand</th>
+                                                <th>Units</th>
+                                                <th style="width:30px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (UnitsSold unit in Model.UnitsSoldMetrics)
+                                            {
+                                                <tr>
+                                                    <td>@unit.Brand</td>
+                                                    <td>
+                                                        <div class="progress progress-xs mb-0 ">
+                                                            <div class="progress-bar progress-bar-danger" style="width: @Model.CalculateUnitsSoldBarWidth(unit)%;"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td>@unit.Units</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+        <!-- Row -->
+        <div class="row no-margin">
+            <div class="col-sm-12" style="padding-left:0;">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Inventory</h6>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body row pa-0">
+                            <div class="table-wrap">
+                                <div class="table-responsive">
+                                    <table class="table display product-overview border-none" id="metrics_table">
+                                        <thead>
+                                            <tr>
+                                                <th>Brand</th>
+                                                <th>Model</th>
+                                                <th></th>
+                                                <th>Date</th>
+                                                <th>Title</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.SearchResults == null || Model.SearchResults.Count == 0)
+                                            {
+                                                <tr>
+                                                    <td colspan="7">No inventory to display.</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                @foreach (DealerInventory inventory in Model.SearchResults)
+                                                {
+                                                    var style = (inventory.IsSold.HasValue && inventory.IsSold == true) ? "alert alert-primary" : "";
+                                                    <tr id="trInventory_@inventory.Id" class= "@style">
+                                                        @if (!String.IsNullOrEmpty(inventory.QInventoryMakeOther))
+                                                        {
+                                                            <td><a asp-controller="Manage" asp-action="Inventory" asp-route-id="@inventory.Id">@inventory.QInventoryMakeOther </a></td>
+                                                        }
+                                                        else if (inventory.Make != null)
+                                                        {
+                                                            <td><a asp-controller="Manage" asp-action="Inventory" asp-route-id="@inventory.Id">@inventory.Make.Name </a></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td></td>
+                                                        }
+                                                        @if (!String.IsNullOrEmpty(inventory.QInventoryModelOther))
+                                                        {
+                                                            <td><a asp-controller="Manage" asp-action="Inventory" asp-route-id="@inventory.Id">@inventory.QInventoryModelOther </a></td>
+                                                        }
+                                                        else if (inventory.Model != null)
+                                                        {
+                                                            <td><a asp-controller="Manage" asp-action="Inventory" asp-route-id="@inventory.Id">@inventory.Model.Name </a></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td></td>
+                                                        }
+                                                        @if (!String.IsNullOrEmpty(inventory.QInventoryModelOptionOther))
+                                                        {
+                                                            <td><a asp-controller="Manage" asp-action="Inventory" asp-route-id="@inventory.Id">@inventory.QInventoryModelOptionOther </a></td>
+                                                        }
+                                                        else if (inventory.ModelOption != null)
+                                                        {
+                                                            <td><a asp-controller="Manage" asp-action="Inventory" asp-route-id="@inventory.Id">@inventory.ModelOption.Name </a></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td></td>
+                                                        }
+                                                        <td>@inventory.DatePosted.ToString("MM/dd/yyyy")</td>
+                                                        <td>@inventory.Title</td>
+                                                        <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#SaleModal" data-inventory="@JsonConvert.SerializeObject(inventory)" data-index="@Model.SearchResults.IndexOf(inventory)"><i class="fa fa-user"></i> Sold</button></td>
+                                                        <td><a class="btn btn-primary btn-sm" href="javascript:if(confirm('Remove this inventory and all its content?')){page.delete(@inventory.Id)}" title="Delete"><i class="fa fa-trash"></i> Delete</a></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+    </div>
+    <!-- /Main Content -->
+    <!-- Modal Content -->
+    <div class="modal bd-example-modal-lg" id="SaleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalTitle">Sales Information</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" role="form" id="ModalForm">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span id="ModelMessage" class=""></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="panel panel-default card-view">
+                                        <div class="panel-heading">
+                                            <div class="pull-left">
+                                                <h6 class="panel-title txt-dark">Customer Information</h6>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="panel-wrapper collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>First Name</label>
+                                                        <input type="text" id="FirstName" name="FirstName" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>Last Name</label>
+                                                        <input type="text" id="LastName" name="LastName" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>Email</label>
+                                                        <input type="text" id="Email" name="Email" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>Phone</label>
+                                                        <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>Address</label>
+                                                        <input type="text" id="Address" name="Address" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>City</label>
+                                                        <input type="text" id="City" name="City" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>State</label>
+                                                        <select id="State" name="State" class="form-control">
+                                                            <option value="AL">AL</option>
+                                                            <option value="AK">AK</option>
+                                                            <option value="AZ">AZ</option>
+                                                            <option value="AR">AR</option>
+                                                            <option value="CA">CA</option>
+                                                            <option value="CO">CO</option>
+                                                            <option value="CT">CT</option>
+                                                            <option value="DC">DC</option>
+                                                            <option value="DE">DE</option>
+                                                            <option value="FL">FL</option>
+                                                            <option value="GA">GA</option>
+                                                            <option value="HI">HI</option>
+                                                            <option value="ID">ID</option>
+                                                            <option value="IL">IL</option>
+                                                            <option value="IN">IN</option>
+                                                            <option value="IA">IA</option>
+                                                            <option value="KS">KS</option>
+                                                            <option value="KY">KY</option>
+                                                            <option value="LA">LA</option>
+                                                            <option value="ME">ME</option>
+                                                            <option value="MD">MD</option>
+                                                            <option value="MA">MA</option>
+                                                            <option value="MI">MI</option>
+                                                            <option value="MN">MN</option>
+                                                            <option value="MS">MS</option>
+                                                            <option value="MO">MO</option>
+                                                            <option value="MT">MT</option>
+                                                            <option value="NE">NE</option>
+                                                            <option value="NV">NV</option>
+                                                            <option value="NH">NH</option>
+                                                            <option value="NJ">NJ</option>
+                                                            <option value="NM">NM</option>
+                                                            <option value="NY">NY</option>
+                                                            <option value="NC">NC</option>
+                                                            <option value="ND">ND</option>
+                                                            <option value="OH">OH</option>
+                                                            <option value="OK">OK</option>
+                                                            <option value="OR">OR</option>
+                                                            <option value="PA">PA</option>
+                                                            <option value="RI">RI</option>
+                                                            <option value="SC">SC</option>
+                                                            <option value="SD">SD</option>
+                                                            <option value="TN">TN</option>
+                                                            <option value="TX">TX</option>
+                                                            <option value="UT">UT</option>
+                                                            <option value="VT">VT</option>
+                                                            <option value="VA">VA</option>
+                                                            <option value="WA">WA</option>
+                                                            <option value="WV">WV</option>
+                                                            <option value="WI">WI</option>
+                                                            <option value="WY">WY</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>Zip</label>
+                                                        <input type="text" id="Zip" name="Zip" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="panel panel-default card-view">
+                                        <div class="panel-heading">
+                                            <div class="pull-left">
+                                                <h6 class="panel-title txt-dark">Sales Information</h6>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="panel-wrapper collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>Person</label>
+                                                        <select type="text" id="DealerEmployeeId" name="DealerEmployeeId" class="form-control">
+                                                            <option value="">Select</option>
+                                                            @foreach (DealerEmployee emp in Model.DealerEmployees)
+                                                            {
+                                                                <option value="@emp.Id">@emp.LastName, @emp.FirstName</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>Price</label>
+                                                        <input type="text" id="PriceSold" name="PriceSold" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="col-form-label" control-label>Date</label>
+                                                    <div class="input-group date" data-provide="datepicker">
+                                                        <input id="DateSold" type="text" name="DateSold" class="form-control" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+                                                        <div class="input-group-addon">
+                                                            <span class="fa fa-calendar"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" control-label>Sales Type</label>
+                                                        <select name="SalesType" id="SalesType" class="form-control">
+                                                            <option value="0">Retail</option>
+                                                            <option value="1">Wholesale</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="OPInventoryId" name="OPInventoryId" type="hidden" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button id="ModalPrev" type="button" class="btn btn-primary pull-left" onclick="javascript: page.nextInventory();">Prev</button>
+                                <input id="SalesInfo_Id" type="hidden" asp-for="SalesInfo.Id" />
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:auto;margin-left:auto;">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="javascript: page.markAsSold();" style="margin-right:auto;margin-left:auto;">Save</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button id="ModalNext" type="button" class="btn btn-primary pull-right" onclick="javascript: page.prevInventory();">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal Content-->
+</section>
+@section Scripts{
+    <!-- Bootstrap Core JavaScript
+    <script src="~/js/temp/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    <!-- Counter Animation JavaScript -->
+    <script src="~/lib/waypoints/jquery.waypoints.min.js"></script>
+    <script src="~/lib/Counter-Up/jquery.counterup.min.js"></script>
+
+    <!-- Bootstrap Datepicker-->
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Data table JavaScript -->
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    <!-- Switchery JavaScript -->
+    <script src="~/lib/switchery/switchery.min.js"></script>
+
+    <!-- Slimscroll JavaScript -->
+    <script src="~/lib/jQuery-slimScroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Sparkline JavaScript -->
+    <script src="~/lib/jquery-sparklines/jquery.sparkline.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="~/lib/raphael/raphael.min.js"></script>
+    <script src="~/lib/morris.js/morris.min.js"></script>
+
+    <!-- Chartist JavaScript -->
+    <script src="~/lib/chartist/chartist.min.js"></script>
+
+    <!-- ChartJS JavaScript -->
+    <script src="~/lib/Chart.js/Chart.min.js"></script>
+
+    <script src="~/lib/jquery-toast-plugin/jquery.toast.min.js"></script>
+
+    <!-- Moment.js -->
+    <script src="~/lib/moment.js/moment.min.js"></script>
+    <!-- Data For Chart Displays-->
+    <script src="~/js/namespace.js"></script>
+    <script type="text/javascript">
+        var data = namespace("Data");
+        data.monthlyIntervals = @Html.Raw(@JsonConvert.SerializeObject(Model.MonthToDateMetrics));
+        data.yearlyIntervals = @Html.Raw(@JsonConvert.SerializeObject(Model.YearToDateMetrics));
+
+        data.yearlyUnitsSold = @Html.Raw(@JsonConvert.SerializeObject(Model.UnitsSoldMetrics));
+        data.monthlyRevenue = @Html.Raw(@JsonConvert.SerializeObject(Model.MonthlyRevenue.Select(p => p.Revenue).ToList()));
+        data.yearlyRevenue = @Html.Raw(@JsonConvert.SerializeObject(Model.YearlyRevenue.Select(p => p.Revenue).ToList()));
+
+        data.inventory = @Html.Raw(@JsonConvert.SerializeObject(Model.SearchResults));
+    </script>
+
+
+    <script src="~/js/manage/index.js"></script>
+}
+<!-- /#wrapper -->
+<!-- JavaScript -->
+<!-- jQuery
+<script src="~/js/temp/jquery/dist/jquery.min.js"></script>-->

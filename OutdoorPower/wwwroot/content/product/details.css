@@ -1,0 +1,93 @@
+﻿section{
+    padding-top: 8vh;
+    background-image: url('../../images/lawn_1a.jpg');
+}
+
+.container.white {
+    background-color: white;
+    border-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+div.description{
+    margin-top: 2em;
+}
+
+div.financing_calculator, div.financing_calculator table.table td {
+    background-color: #FBFBEF;
+    border: #FBFBEF;
+    border-radius: 3px;
+}
+
+div.financing_calculator{
+    padding: 1em;
+}
+
+div.owl-carousel .item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.owl-theme .owl-nav [class*='owl-'], .owl-nav button.owl-prev, .owl-nav button.owl-next {
+    background-color: #ED2024 !important;
+    color: white !important;
+    font-style: normal;
+}
+
+button.owl-prev i, button.owl-next i{
+    font-style: normal;
+}
+
+.owl-theme .owl-nav [class*='owl-']:hover {
+    background: #ED2024;
+    color: #FFF;
+    text-decoration: none;
+}
+
+h6 .header{
+    margin-bottom: 1em;
+}
+
+ul.information{
+    margin-bottom: .5em;
+}
+
+ul.information li {
+    display: inline-block;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+ul.information.outlined li {
+    border-right: 2px solid #ED2024;
+}
+
+ul.information li:last-child {
+    padding-right: 10px;
+    border-right: none;
+}
+
+div.listing-slider{
+    min-height: 60vh;
+}
+
+table.small-text {
+    font-size: x-small;
+}
+
+table.small-text td {
+    padding: 5px 8px 6px;
+}
+
+table.small-text input{
+    max-width: 5em;
+}
+
+table.small-text a.btn{
+    margin-top: 2em;
+    max-width: 150px;
+    padding: .5em;
+    color: white;
+}
